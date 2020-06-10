@@ -8,7 +8,7 @@ import bell from '../../assets/bell.png';
 
 const title = 'TODO - Gerenciamento de tarefas';
 
-function Header() {
+function Header({lateCount, clickNotification}) {
     return (
         <S.Container>
             <S.LeftSide>
@@ -21,10 +21,10 @@ function Header() {
                 <span className="dividir"></span>
                 <a href="#">Sincronizar Celular</a>
                 <span className="dividir"></span>
-                <a href="#" id="notificacao">
+                <button onClick={clickNotification} id="notificacao">
                     <img src={bell} alt="Notificação"/>
-                    <span>5</span>
-                </a>
+    <span>{lateCount}</span>
+                </button>
             </S.RightSide>
         </S.Container>
     );

@@ -7,7 +7,6 @@ export const Container = styled.div`
     border-bottom: 5px solid #EE6B26;
     
     display:flex;
-    font-family: Arial, Helvetica, sans-serif;
 `
 
 export const LeftSide = styled.div`
@@ -29,15 +28,20 @@ export const RightSide = styled.div`
     display:flex;
     align-items: center;
     justify-content: flex-end;
-    a{
+    a, button{
         color: #fff;
         font-weight: bold;
         text-decoration:none;
-        margin 0 10px;
+        margin: 0 10px;
 
         &:hover{
             color:#EE6B26;
         }
+    }
+    button{
+        background: none;
+        border: none;
+        cursor:pointer;
     }
 
     #notificacao{

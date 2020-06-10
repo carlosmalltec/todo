@@ -4,7 +4,7 @@ startOfMonth, endOfMonth, startOfYear, endOfYear} = require('date-fns');
 const current = new Date();
 class TaskController {
 
-    async all(req, res) {
+    async todos(req, res) {
         await TaskModel.find({ macaddress: { '$in': req.params.macaddress } })
             .sort('when')
             .then(response => {
@@ -29,7 +29,6 @@ class TaskController {
         const task = new TaskModel(req.body); //Instancia da model com os valores
         await task.save()
             .then(response => {
-                //requisicao com sucesso
                 return res.status(200).json(response);
             }
             ).catch(error => {
@@ -74,8 +73,7 @@ class TaskController {
                 return res.status(500).json(error);
             })
     }
-    async late(req, res) {
-        //tarefas atrasadas
+    async atrasada(req, res) {
         await TaskModel.find({
             'when': { '$lt': current }, //<=
             'macaddress': { '$in': req.params.macaddress }
@@ -87,8 +85,7 @@ class TaskController {
                 return res.status(500).json(error);
             });
     }
-    async today(req, res) {
-        //tarefas para o dia de hoje
+    async dia(req, res) {
         await TaskModel.find({
             'macaddress': { '$in': req.params.macaddress },
             'when': { '$gte': startOfToday(current), '$lte': endOfDay(current) }, //>= e <=
@@ -102,7 +99,6 @@ class TaskController {
     }
 
     async semana(req, res) {
-        //tarefas para semna
         await TaskModel.find({
             'macaddress': { '$in': req.params.macaddress },
             'when': { '$gte': startOfWeek(current), '$lte': endOfWeek(current) }, //>= e <=
@@ -116,7 +112,6 @@ class TaskController {
     }
 
     async mes(req, res) {
-        //tarefas do mes
         await TaskModel.find({
             'macaddress': { '$in': req.params.macaddress },
             'when': { '$gte': startOfMonth(current), '$lte': endOfMonth(current) }, //>= e <=
@@ -130,7 +125,6 @@ class TaskController {
     }
 
     async ano(req, res) {
-        //tarefas do ano
         await TaskModel.find({
             'macaddress': { '$in': req.params.macaddress },
             'when': { '$gte': startOfYear(current), '$lte': endOfYear(current) }, //>= e <=
@@ -145,6 +139,3 @@ class TaskController {
 }
 
 module.exports = new TaskController();
-
-//Facilita da chamada do controller.
-//controller.nomeDaFuncao;

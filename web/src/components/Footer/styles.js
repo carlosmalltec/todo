@@ -13,7 +13,6 @@ export const Container = styled.div`
     justify-content: center;
     
     display:flex;
-    font-family: Arial, Helvetica, sans-serif;
 
     span{
         color:#fff;
